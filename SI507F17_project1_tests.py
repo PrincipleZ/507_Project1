@@ -1,18 +1,23 @@
-## Do not change import statements.
+# Do not change import statements.
 import unittest
 from SI507F17_project1_cards import *
 
-## Write your unit tests to test the cards code here.
-## You should test to ensure that everything explained in the code description file works as that file says.
-## If you have correctly written the tests, at least 3 tests should fail. If more than 3 tests fail, it should be because multiple of the test methods address the same problem in the code.
-## You may write as many TestSuite subclasses as you like, but you should try to make these tests well-organized and easy to read the output.
-## You should invoke the tests with verbosity=2 (make sure you invoke them!)
+# Write your unit tests to test the cards code here.
+# You should test to ensure that everything explained in the code description
+# file works as that file says.
+# If you have correctly written the tests, at least 3 tests should fail. 
+# If more than 3 tests fail, it should be because multiple of the test methods 
+# address the same problem in the code.
+# You may write as many TestSuite subclasses as you like, but you should 
+# try to make these tests well-organized and easy to read the output.
+# You should invoke the tests with verbosity=2 (make sure you invoke them!)
 
 ###########
 
-## Test Card class
+
+# Test Card class
 class testCardClass(unittest.TestCase):
-	## Test Card class constructor
+	# Test Card class constructor
 	def test_default_constructor(self):
 		default_card = Card()
 		self.assertEqual(default_card.suit, "Diamonds")
@@ -55,6 +60,26 @@ class testCardClass(unittest.TestCase):
 		self.assertEqual(king_of_hearts.rank, "King")
 		self.assertEqual(king_of_hearts.rank_num, 13)
 
+	# Test Card string output
+	def test_card_string(self):
+		ace_of_spades = Card(3, 1)
+		five_of_hearts = Card(2, 5)
+
+		self.assertEqual(str(ace_of_spades), "Ace of Spades")
+		self.assertEqual(str(five_of_hearts), "Five of Hearts")
+
+# Test Deck Class
+class testDeckClass(unittest.TestCase):
+	# Test Deck constructor
+	def test_deck_constructor(self):
+		d = Deck()
+		self.assertEqual(len(d.cards), 52)
+		c = Card(0, 1)
+		print(c)
+		print(d.cards[0])
+		self.assertEqual(c.rank, d.cards[0].rank)
+		
+
 
 
 
@@ -67,4 +92,4 @@ class testCardClass(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main(verbosity=2)
+	unittest.main(verbosity=2)

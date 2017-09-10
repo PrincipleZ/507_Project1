@@ -9,3 +9,62 @@ from SI507F17_project1_cards import *
 ## You should invoke the tests with verbosity=2 (make sure you invoke them!)
 
 ###########
+
+## Test Card class
+class testCardClass(unittest.TestCase):
+	## Test Card class constructor
+	def test_default_constructor(self):
+		default_card = Card()
+		self.assertEqual(default_card.suit, "Diamonds")
+		self.assertEqual(default_card.rank, 2)
+		self.assertEqual(default_card.rank_num, 2)
+	
+	def test_number_constructor1(self):
+		six_of_spades = Card(3, 6)
+		three_of_hearts = Card(2, 3)
+	
+		self.assertEqual(six_of_spades.suit, "Spades")
+		self.assertEqual(six_of_spades.rank, 6)
+		self.assertEqual(three_of_hearts.suit, "Hearts")
+		self.assertEqual(three_of_hearts.rank, 3)
+
+	def test_number_constructor2(self):
+		five_of_clubs = Card(1, 5)
+		eight_of_diamonds = Card(0, 8)
+
+		self.assertEqual(five_of_clubs.suit, "Clubs")
+		self.assertEqual(five_of_clubs.rank, 5)
+		self.assertEqual(eight_of_diamonds.suit, "Diamonds")
+		self.assertEqual(eight_of_diamonds.rank, 8)
+
+	def test_face_constuctor1(self):
+		jack_of_diamonds = Card(0, 11)
+		queen_of_spades = Card(3, 12)
+
+		self.assertEqual(jack_of_diamonds.rank, "Jack")
+		self.assertEqual(jack_of_diamonds.rank_num, 11)
+		self.assertEqual(queen_of_spades.rank, "Queen")
+		self.assertEqual(queen_of_spades.rank_num, 12)
+
+	def test_face_constructor2(self):
+		ace_of_spades = Card(3, 1)
+		king_of_hearts = Card(2, 13)
+
+		self.assertEqual(ace_of_spades.rank, "Ace")
+		self.assertEqual(ace_of_spades.rank_num, 1)
+		self.assertEqual(king_of_hearts.rank, "King")
+		self.assertEqual(king_of_hearts.rank_num, 13)
+
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

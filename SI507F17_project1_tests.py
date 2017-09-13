@@ -72,6 +72,7 @@ class testCardClass(unittest.TestCase):
 class testDeckClass(unittest.TestCase):
 	# Test Deck constructor
 	def test_deck_constructor(self):
+		d = Deck()
 		self.assertEqual(len(d.cards), 52)
 		# check for duplicates
 		card_list = []
@@ -81,21 +82,25 @@ class testDeckClass(unittest.TestCase):
 
 	# Not checking contents since it just calls str function for each card
 	def test_deck_string(self):
+		d = Deck()
 		temp = str(d)
 		self.assertEqual(temp.count("\n"), 51)
 
 	def test_pop_one_card(self):
+		d = Deck()
 		test_list = d.cards
 		d.pop_card()
 		test_list.pop(-1)
 		self.assertEqual(d.cards, test_list)
 
 	def test_pop_all_card(self):
+		d = Deck()
 		while d.cards:
 			d.pop_card()
 		self.assertFalse(d.cards)
 
 	def test_pop_empty(self):
+		d = Deck()
 		d.cards = []
 		d.pop_card()
 

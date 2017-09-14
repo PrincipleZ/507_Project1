@@ -71,39 +71,37 @@ class testCardClass(unittest.TestCase):
 
 # Test Deck Class
 class testDeckClass(unittest.TestCase):
+	def setUp(self):
+		self.d = Deck()
 	# Test Deck constructor
 	def test_deck_constructor(self):
-		d = Deck()
-		self.assertEqual(len(d.cards), 52)
+		self.assertEqual(len(self.d.cards), 52)
 		# check for duplicates
 		card_list = []
-		for i in d.cards:
+		for i in self.d.cards:
 			card_list.append(i.suit+" "+str(i.rank))
 		self.assertEqual(len(card_list), len(set(card_list)))
 
 	# Not checking contents since it just calls str function for each card
 	def test_deck_string(self):
-		d = Deck()
-		temp = str(d)
+		temp = str(self.d)
 		self.assertEqual(temp.count("\n"), 51)
 
 	def test_pop_one_card(self):
-		d = Deck()
-		test_list = d.cards
-		d.pop_card()
+		test_list = self.d.cards
+		self.d.pop_card()
 		test_list.pop(-1)
-		self.assertEqual(d.cards, test_list)
+		self.assertEqual(self.d.cards, test_list)
 
 	def test_pop_all_card(self):
-		d = Deck()
-		while d.cards:
-			d.pop_card()
-		self.assertFalse(d.cards)
+		while self.d.cards:
+			self.d.pop_card()
+		self.assertFalse(self.d.cards)
 
 	def test_pop_empty(self):
-		d = Deck()
-		d.cards = []
-		d.pop_card()
+
+		self.d.cards = []
+		self.d.pop_card()
 
 	# A helper function determine if two decks have high similarity. Two decks are considered different
 	# if there are more or equal to *th* cards are in different order
@@ -118,37 +116,34 @@ class testDeckClass(unittest.TestCase):
 		return count >= th
 
 	def test_shuffle(self):
-		d = Deck()
 		d2 = Deck()
-		temp = copy.deepcopy(d.cards)
-		d.shuffle()
+		temp = copy.deepcopy(self.d.cards)
+		self.d.shuffle()
 		d2.shuffle()
-		self.assertTrue(self.difference_in_deck(temp, d.cards, 10))
-		self.assertTrue(self.difference_in_deck(d.cards, d2.cards, 10))
+		self.assertTrue(self.difference_in_deck(temp, self.d.cards, 10))
+		self.assertTrue(self.difference_in_deck(self.d.cards, d2.cards, 10))
 
 	def test_replace_card(self):
-		d = Deck()
-		d.shuffle()
-		temp = copy.deepcopy(d.cards)
-		card1 = d.cards.pop()
-		card2 = d.cards.pop()
-		d.replace_card(card2)
-		self.assertTrue(len(d.cards), 51)
-		d.replace_card(card1)
-		self.assertTrue(len(d.cards), 52)
-		self.assertFalse(self.difference_in_deck(d.cards, temp, 1))
+		self.d.shuffle()
+		temp = copy.deepcopy(self.d.cards)
+		card1 = self.d.cards.pop()
+		card2 = self.d.cards.pop()
+		self.d.replace_card(card2)
+		self.assertTrue(len(self.d.cards), 51)
+		self.d.replace_card(card1)
+		self.assertTrue(len(self.d.cards), 52)
+		self.assertFalse(self.difference_in_deck(self.d.cards, temp, 1))
 
 	def test_replace_more_card(self):
-		d = Deck()
-		d.shuffle()
-		temp = copy.deepcopy(d.cards)
-		card1 = d.cards[0]
-		card2 = d.cards[1]
-		d.replace_card(card1)
-		self.assertTrue(len(d.cards), 52)
-		d.replace_card(card2)
-		self.assertTrue(len(d.cards), 52)
-		self.assertFalse(self.difference_in_deck(temp, d.cards, 1))
+		self.d.shuffle()
+		temp = copy.deepcopy(self.d.cards)
+		card1 = self.d.cards[0]
+		card2 = self.d.cards[1]
+		self.d.replace_card(card1)
+		self.assertTrue(len(self.d.cards), 52)
+		self.d.replace_card(card2)
+		self.assertTrue(len(self.d.cards), 52)
+		self.assertFalse(self.difference_in_deck(temp, self.d.cards, 1))
 
 
 

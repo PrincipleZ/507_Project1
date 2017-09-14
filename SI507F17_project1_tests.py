@@ -66,7 +66,7 @@ class testCardClass(unittest.TestCase):
 		ace_of_spades = Card(3, 1)
 		five_of_hearts = Card(2, 5)
 
-		self.assertEqual(str(ace_of_spades), "Ace of Spades")
+		self.assertEqual(str(ace_of_spades), "Ace of Spades", "Output should be Ace of Spades")
 		self.assertEqual(str(five_of_hearts), "Five of Hearts")
 
 # Test Deck Class
@@ -101,7 +101,9 @@ class testDeckClass(unittest.TestCase):
 	def test_pop_empty(self):
 
 		self.d.cards = []
-		self.d.pop_card()
+		
+		with self.assertRaises(IndexError):
+			self.d.pop_card()
 
 	# A helper function determine if two decks have high similarity. Two decks are considered different
 	# if there are more or equal to *th* cards are in different order
@@ -145,8 +147,15 @@ class testDeckClass(unittest.TestCase):
 		self.assertTrue(len(self.d.cards), 52)
 		self.assertFalse(self.difference_in_deck(temp, self.d.cards, 1))
 
+	def test_sort_cards(self):
+		temp = copy.deepcopy(self.d.cards)
+		self.d.shuffle()
+		self.d.sort_cards()
+		self.assertFalse(self.difference_in_deck(temp, self.d.cards, 1))
 
-
+	def test_deal_full_hand(self):
+		temp = copy.deepcopy(self.d.cards)
+		self.assertEqual(len(self.d.deal_hand(52)), 52)
 
 	
 

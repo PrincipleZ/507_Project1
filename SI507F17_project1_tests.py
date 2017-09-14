@@ -106,7 +106,7 @@ class testDeckClass(unittest.TestCase):
 		d.pop_card()
 
 	# A helper function determine if two decks have high similarity. Two decks are considered different
-	# if there are more than *th* cards are in different order
+	# if there are more or equal to *th* cards are in different order
 
 	def difference_in_deck(self, a, b, th):
 		count = 0
@@ -115,7 +115,7 @@ class testDeckClass(unittest.TestCase):
 				count += 1
 			elif i.rank != j.rank:
 				count += 1 
-		return count > th
+		return count >= th
 
 	def test_shuffle(self):
 		d = Deck()
@@ -128,6 +128,30 @@ class testDeckClass(unittest.TestCase):
 
 	def test_replace_card(self):
 		d = Deck()
+		d.shuffle()
+		temp = copy.deepcopy(d.cards)
+		card1 = d.cards.pop()
+		card2 = d.cards.pop()
+		d.replace_card(card2)
+		self.assertTrue(len(d.cards), 51)
+		d.replace_card(card1)
+		self.assertTrue(len(d.cards), 52)
+		self.assertFalse(self.difference_in_deck(d.cards, temp, 1))
+
+	def test_replace_more_card(self):
+		d = Deck()
+		d.shuffle()
+		temp = copy.deepcopy(d.cards)
+		card1 = d.cards[0]
+		card2 = d.cards[1]
+		d.replace_card(card1)
+		self.assertTrue(len(d.cards), 52)
+		d.replace_card(card2)
+		self.assertTrue(len(d.cards), 52)
+		self.assertFalse(self.difference_in_deck(temp, d.cards, 1))
+
+
+
 
 	
 

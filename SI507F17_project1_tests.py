@@ -1,5 +1,6 @@
 # Do not change import statements.
 import unittest
+import copy
 from SI507F17_project1_cards import *
 
 # Write your unit tests to test the cards code here.
@@ -103,6 +104,30 @@ class testDeckClass(unittest.TestCase):
 		d = Deck()
 		d.cards = []
 		d.pop_card()
+
+	def difference_in_deck(self, a, b):
+		count = 0
+		for i, j in zip(a, b):
+			if i.suit != j.suit:
+				count += 1
+			elif i.rank != j.rank:
+				count += 1 
+		return count > 10
+
+	def test_shuffle(self):
+		d = Deck()
+		d2 = Deck()
+		temp = copy.deepcopy(d.cards)
+		d.shuffle()
+		d2.shuffle()
+		self.assertTrue(self.difference_in_deck(temp, d.cards))
+		self.assertTrue(self.difference_in_deck(d.cards, d2.cards))
+
+	# A helper function determine if two decks have high similarity. Two decks are considered different
+	# if there are more than 10 cards are in different order
+
+
+
 
 
 

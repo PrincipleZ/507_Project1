@@ -192,28 +192,18 @@ class testWarGame(unittest.TestCase):
 
 class testShowSong(unittest.TestCase):
 	def test_show_song_input_type(self):
-		with self.assertRaises(TypeError):
+		with self.assertRaises(TypeError, "There should be a TypeError if input is not a string"):
 			show_song([2, 3])
 
 	def test_show_song_return_type(self):
 		test_song = show_song()
 		self.assertTrue(type(test_song)==helper_functions.Song)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	def test_show_song_search(self):
+		test_song = show_song("Poker face")
+		songs_resp = helper_functions.get_and_cache_songs("Poker face")
+		song_objs = [helper_functions.Song(s) for s in songs_resp["results"]]
+		self.assertTrue(test_song in song_objs, "Searching mechanism is not working correctly")
 
 
 

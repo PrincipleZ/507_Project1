@@ -1,33 +1,27 @@
 # Card Game "War" Simulator
 
-This is a python program that will simulate the card game "War" 
+This is a python program that will simulate the card game "War". 
 
 ## Getting Started
 
-Clone the code and run ```python3 SI507F17_project1_cards.py``` to begin the simulation
+Clone the code and run ```python3 SI507F17_project1_cards.py``` to begin the simulation.
 
 ### Prerequisites
 
 Required packages to run the program are included in the requirements.txt
-Use ```pip install -r requirements.txt``` to install the required packages
+Use ```pip install -r requirements.txt``` to install the required packages.
 
-### Installing
+## Code function
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+#### A class ```Card```
+* The class Card has 3 class variables: ```suit_names```, ```rank_levels```, and ```faces```
+* ```suit_names``` contains a list of strings that represent suits: ```Diamonds```, ```Clubs```, ```Hearts```, ```Spades```
+* ```rank_levels``` contains a list of integers, 1-13
+* ```faces``` contains a dictionary whose keys are numbers and whose values are strings. It has the following key-value pairs:
+    * 1:"Ace"
+    * 11:"Jack"
+    * 12:"Queen"
+    * 13:"King"
 
 ## Running the tests
 

@@ -164,7 +164,8 @@ class testDeckClass(unittest.TestCase):
 
 	def test_deal_full_hand(self):
 		temp = copy.deepcopy(self.d.cards)
-		self.assertEqual(len(self.d.deal_hand(52)), 52, "It should have been able to deal the whole deck")
+		self.assertEqual(len(self.d.deal_hand(52)), 52, 
+			"It should have been able to deal the whole deck")
 
 	def test_deal_one_card(self):
 		self.assertEqual(len(self.d.deal_hand(1)), 1)

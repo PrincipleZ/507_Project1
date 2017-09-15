@@ -73,6 +73,19 @@ class testCardClass(unittest.TestCase):
 class testDeckClass(unittest.TestCase):
 	def setUp(self):
 		self.d = Deck()
+	
+	# A helper function determine if two decks have high similarity. Two decks are considered different
+	# if there are more or equal to *th* cards are in different order
+
+	def difference_in_deck(self, a, b, th):
+		count = 0
+		for i, j in zip(a, b):
+			if i.suit != j.suit:
+				count += 1
+			elif i.rank != j.rank:
+				count += 1 
+		return count >= th
+	
 	# Test Deck constructor
 	def test_deck_constructor(self):
 		self.assertEqual(len(self.d.cards), 52)
@@ -88,10 +101,17 @@ class testDeckClass(unittest.TestCase):
 		self.assertEqual(temp.count("\n"), 51)
 
 	def test_pop_one_card(self):
-		test_list = self.d.cards
+		test_list = copy.deepcopy(self.d.cards)
 		self.d.pop_card()
 		test_list.pop(-1)
-		self.assertEqual(self.d.cards, test_list)
+		self.assertFalse(self.difference_in_deck(self.d.cards, test_list, 1))
+
+	def test_pop_inner_card(self):
+		test_list = copy.deepcopy(self.d.cards)
+		self.d.pop_card(5)
+		test_list.pop(5)
+		self.assertFalse(self.difference_in_deck(self.d.cards, test_list, 1))
+
 
 	def test_pop_all_card(self):
 		while self.d.cards:
@@ -105,17 +125,6 @@ class testDeckClass(unittest.TestCase):
 		with self.assertRaises(IndexError):
 			self.d.pop_card()
 
-	# A helper function determine if two decks have high similarity. Two decks are considered different
-	# if there are more or equal to *th* cards are in different order
-
-	def difference_in_deck(self, a, b, th):
-		count = 0
-		for i, j in zip(a, b):
-			if i.suit != j.suit:
-				count += 1
-			elif i.rank != j.rank:
-				count += 1 
-		return count >= th
 
 	def test_shuffle(self):
 		d2 = Deck()
@@ -155,7 +164,7 @@ class testDeckClass(unittest.TestCase):
 
 	def test_deal_full_hand(self):
 		temp = copy.deepcopy(self.d.cards)
-		self.assertEqual(len(self.d.deal_hand(52)), 52)
+		self.assertEqual(len(self.d.deal_hand(52)), 52, "It should have been able to deal the whole deck")
 
 	def test_deal_one_card(self):
 		self.assertEqual(len(self.d.deal_hand(1)), 1)

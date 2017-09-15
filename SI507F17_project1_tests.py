@@ -157,7 +157,48 @@ class testDeckClass(unittest.TestCase):
 		temp = copy.deepcopy(self.d.cards)
 		self.assertEqual(len(self.d.deal_hand(52)), 52)
 
-	
+	def test_deal_one_card(self):
+		self.assertEqual(len(self.d.deal_hand(1)), 1)
+
+	def test_deal_more_than_deck(self):
+		self.d.pop_card()
+		with self.assertRaises(IndexError):
+			self.d.deal_hand(52)
+
+class testWarGame(unittest.TestCase):
+	def test_war_game_type(self):
+		i = 100
+		while i > 0:
+			res = play_war_game(testing=True)
+			self.assertTrue(type(res) is tuple)
+			self.assertTrue(type(res[0]) is str)
+			self.assertTrue(type(res[1]) is int)
+			self.assertTrue(type(res[2]) is int)
+			i -= 1
+
+	def test_war_game_result(self):
+		i = 100
+		while i > 0:
+			res = play_war_game(testing=True)
+			if res[0] == "Player1":
+				self.assertTrue(res[1] > res[2])
+			elif res[0] == "Player2":
+				self.assertTrue(res[1] < res[2])
+			elif res[0] == "Tie":
+				self.assertTrue(res[1] == res[2])
+			else:
+				self.fail("Game winner should be one of the following: Player1, Player2, Tie")
+			i -= 1
+
+class testShowSong(unittest.TestCase):
+	def test_show_song_input_type(self):
+		with self.assertRaises(TypeError):
+			show_song([2, 3])
+
+	def test_show_song_return_type(self):
+		test_song = show_song()
+		self.assertTrue(type(test_song)==helper_functions.Song)
+
 
 
 

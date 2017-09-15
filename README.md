@@ -15,15 +15,15 @@ This project is built for python3. It is recommanded to build this code and inst
 Required packages to run the program are included in the ```requirements.txt```.
 Use ```pip install -r requirements.txt``` to install the required packages.
 
-### Running the tests
+## Running the tests
 
 The test can be run by ```python3 SI507F17_project1_tests.py``` from command line.
 
-### Coding style
+## Coding style
 
 This project follows PEP8 style.
 
 ## Acknowledgments
 
-* This project is the first homework project for SI507 at University of Michigan. Any bugs in the code was intentionally written.
+This project is the first homework project for SI507 at University of Michigan. Any bugs in the code was intentionally written.
 

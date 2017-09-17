@@ -25,5 +25,5 @@ This project follows PEP8 style.
 
 ## Acknowledgments
 
-This project is the first homework project for SI507 at University of Michigan. Any bugs in the code was intentionally written.
+This project is the first homework project for SI507 at University of Michigan. Any bugs in the code were intentionally written.
 
